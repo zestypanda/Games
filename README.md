@@ -1,2 +1,2 @@
 # Games
-Design MineSweeper and Snake game
+Implement MineSweeper and Snake game in C++ using object-oriented principles
