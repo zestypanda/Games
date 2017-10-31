@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-using namespace std;
 
 class Snake {
 public:
@@ -16,8 +15,8 @@ public:
 private:
     // board_ with '2' as snake head, '1' as snake body, 'F' as food
     // body_ is the positions of snake body
-    vector<vector<char>> board_;
-    queue<pair<int,int>> body_;
+    std::vector<std::vector<char>> board_;
+    std::queue<std::pair<int,int>> body_;
     int m_ = 8, n_= 10, len_ = 1;
 };
 
