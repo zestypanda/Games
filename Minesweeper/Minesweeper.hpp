@@ -1,7 +1,6 @@
 #ifndef MINESWEEPER_HPP_
 #define MINESWEEPER_HPP_
 #include <vector> 
-using namespace std;
 // Class for the Minesweeper Game.
 class Minesweeper {
 public:
@@ -15,8 +14,8 @@ private:
     // board_ for numbers and mine, revealed_ for whether a grid is revealed 
     // m is total mine count, and tot is total unrevealed non-mine grids
     // The player wins when tot == 0;
-    vector<vector<char>> board_;
-    vector<vector<int>> revealed_;
+    std::vector<vector<char>> board_;
+    std::vector<vector<int>> revealed_;
     int m = 10, tot = 0;
 };
 #endif
