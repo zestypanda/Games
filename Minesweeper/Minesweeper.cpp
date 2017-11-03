@@ -207,8 +207,3 @@ void Minesweeper::solverAI() {
              circle = 0;
      }
 }
-
-
-
-
-
