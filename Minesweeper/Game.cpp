@@ -1,30 +1,46 @@
 #include "Minesweeper.hpp"
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 int main() {
-    char play = 'Y';
-    // Allow continuous replays
-    while (play == 'Y') {
-        // Initialize a game
-        cout << "************************" << endl;
-        cout << "Welcome! Do You Want Easy, Intermediate or Hard E/I/H?" << endl;
-        char c;
-        cin >> c;
+    // Initialize a game
+    cout << "************************" << endl;
+    cout << "Welcome! Do You Want Easy, Intermediate or Hard E/I/H?" << endl;
+    string input;
+    getline(cin,input);
+    istringstream iss(input);
+    char c;
+    if (iss >> c) {
         Minesweeper game(c);
-        game.initialize();
         game.print();
+        cout << "Do You Want to Try AI Solver? Y/N" << endl;
+        getline(cin,input);
+        istringstream iss(input);
+        char c;
+        if (iss >> c && (c == 'Y' || c == 'y')) {
+            game.solverAI();
+        }
         while (true) {
-            // Click a position. If invalid, nothing changes 
+            // Input a position. If invalid, nothing changes 
             cout << "Please Input An Coordinate" << endl;
+            getline(cin,input);
+            istringstream iss(input);
             int row, col;
-            cin >> row >> col;
-            // Check whether game is over, i.e. win or lose
-            if (!game.click(row, col)) {
-                cin >> play;
-                break;
+            if (iss >> row >> col) {
+                cout << "Do You Want Click, Mark or UnMark C/M/U?" << endl;
+                char c;
+                getline(cin,input);
+                istringstream iss(input);
+                if (iss >> c) {
+                    if (c == 'C' || c == 'c')
+                       game.click(row, col);
+                    else if (c == 'M' || c == 'm')
+                       game.mark(row, col);
+                    else if (c == 'U' || c == 'u')
+                       game.unmark(row, col);
+                }
             }
-            game.print();
         }
     }
 }

@@ -9,13 +9,17 @@ public:
   Minesweeper(char c); 
   void initialize();
   void print() const; 
-  bool click(int row, int col);
+  void click(int row, int col);
+  void mark(int row, int col);
+  void unmark(int row, int col);
+  void solverAI();
 private:
-    // board_ for numbers and mine, revealed_ for whether a grid is revealed 
-    // m is total mine count, and tot is total unrevealed non-mine grids
+    // board_ for numbers and mine, 
+    // revealed_ for whether a grid has been explored 
+    // m is total mine count, and tot is total grids
     // The player wins when tot == 0;
-    std::vector<vector<char>> board_;
-    std::vector<vector<int>> revealed_;
+    std::vector<std::vector<int>> board_;
+    std::vector<std::vector<int>> revealed_;
     int m = 10, tot = 0;
 };
 #endif
