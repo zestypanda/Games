@@ -39,7 +39,7 @@ Minesweeper::Minesweeper(char c) {
       initialize();
 }
 // randomly distribute mines and initialize the board_
-// -10 is mine, -k means k mines surrounding
+// -10 is mine, k means k mines surrounding
 void Minesweeper::initialize () {
       int n = board_.size();
       // put row and column number 
@@ -93,7 +93,7 @@ void Minesweeper::print() const {
       }
 }
 // click a grid of given coordinates; if invalid, do nothing
-// When game is over, i.e. win or lose, return false
+// When game is over, i.e. win or lose, exit
 void Minesweeper::click(int row, int col) { 
       int n = board_.size();
       // invalid or already revealed
@@ -148,6 +148,7 @@ void Minesweeper::solverAI() {
      while (true) {
          int sz = myq.size(), row, col;
          if (myq.empty()) {
+            // find next available grid to click
             int i = 0;
             for (i = 0; i < n*n; i++) {
                 if (revealed_[i/n][i%n] == 0) break; 
@@ -181,6 +182,7 @@ void Minesweeper::solverAI() {
                      int r = row + i, c = col + j;
                      if (r < 0 || r == n || c < 0 || c == n) continue;
                      if (revealed_[r][c] == 0) {
+                         // case 1: all mines found; case 2: all unrevealed grids are mines
                          if (board_[row][col] == n1) {
                              click(r, c);
                              myq.push({r,c});
@@ -194,6 +196,7 @@ void Minesweeper::solverAI() {
          }
          if (myq.size() == sz) {
              if (++circle == limit) {
+                 // possible circle, find next available grid to click 
                  int i = 0;
                  for (i = 0; i < n*n; i++) {
                      if (revealed_[i/n][i%n] == 0) break; 
